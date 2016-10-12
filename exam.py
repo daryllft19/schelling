@@ -15,7 +15,10 @@ class Grid(object):
 	
 
 	def adjacent(self, row,col):
-		return numpy.array(self.array[(0 if row-1 < 0 else row-1):(self.length if row+2>self.length else row+2), range((0 if col-1 < 0 else col-1), (self.width if col+2>self.width else col+2))])
+		return Grid(numpy.array(self.array[(0 if row-1 < 0 else row-1):(self.length if row+2>self.length else row+2), range((0 if col-1 < 0 else col-1), (self.width if col+2>self.width else col+2))]))
+
+	def vacate(self, row, col): 
+		self.array[row][col] = ' '	
  
 '''
 Accepts a file parameter then converts the contents into a 2d array
@@ -51,4 +54,5 @@ def schelling(grid, t):
 	if t < 0 or t > 1:
 		return None 
 
+	
 		
