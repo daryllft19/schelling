@@ -1,4 +1,5 @@
 #! /usr/bin/python
+from __future__ import division
 import numpy
 
 '''
@@ -28,3 +29,17 @@ def loadgrid(file):
 	length, width = numpy.shape(list)
 
 	return Grid(numpy.array(list))
+
+
+'''
+Computes for index of dissimilarity using 4 decimal places
+'''
+def dissimilarity(grid, row1, col1, row2, col2):
+	sub = Grid(numpy.array(grid.array[row1:row2+1,range(col1,col2+1)].tolist()))
+	index = round(0.5*abs(sub.x/grid.x - sub.o/grid.o), 4)
+	return index
+
+
+
+
+	
