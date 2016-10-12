@@ -11,9 +11,12 @@ class Grid(object):
 		self.array = array
 		self.x = (array == 'X').sum() 
 		self.o = (array == 'O').sum() 
-
+		self.length, self.width = array.shape
 	
 
+	def adjacent(self, row,col):
+		return numpy.array(self.array[(0 if row-1 < 0 else row-1):(self.length if row+2>self.length else row+2), range((0 if col-1 < 0 else col-1), (self.width if col+2>self.width else col+2))])
+ 
 '''
 Accepts a file parameter then converts the contents into a 2d array
 '''
@@ -41,5 +44,11 @@ def dissimilarity(grid, row1, col1, row2, col2):
 
 
 
+'''
 
-	
+'''
+def schelling(grid, t):
+	if t < 0 or t > 1:
+		return None 
+
+		
