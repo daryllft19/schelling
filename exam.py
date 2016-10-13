@@ -143,7 +143,7 @@ def schelling(grid, t, **args):
 			for j in range(grid.width):
 				if grid.satisfaction(i,j) < t:
 					dissatisfied.append((i,j))
-		if args['log']:
+		if 'log' in args and args['log']:
 			dissatisfaction = len(dissatisfied)/(grid.get_x() + grid.get_o())
 			print "Satisfaction: ", (1-dissatisfaction) 
 			print "Round: ", round
@@ -152,7 +152,7 @@ def schelling(grid, t, **args):
 			grid.vacate(row,col)
 			changed_flag = True
 		
-		if args['limit'] and round == args['limit']:
+		if 'limit' in args and round == args['limit']:
 			break	
 
 	return grid
@@ -184,7 +184,7 @@ def schelling_segregate(grid,t, **args):
 			vacant.append((row,col))
 			changed_flag = True
 			
-		if args['log']:
+		if 'log' in args and args['log']:
 			dissatisfaction = len(dissatisfied)/(grid.get_x() + grid.get_o())
 			print "Satisfaction: ", (1-dissatisfaction) 
 			print "Round: ", round
@@ -193,7 +193,7 @@ def schelling_segregate(grid,t, **args):
 			row,col = vacant.pop(random.randint(0,len(vacant)-1))
 			grid.place(row,col, agent)
 
-		if args['limit'] and round == args['limit']:
+		if 'limit' in args and round == args['limit']:
 			break	
 
 
