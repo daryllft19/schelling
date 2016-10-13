@@ -44,7 +44,7 @@ class Grid(object):
 		self.vacant = self.get_vacant()
 
 	'''
-	Computes the satisfaction of a specific cell
+	Computes the satisfaction of a specific cell. If solo, consider as dissatisfied
 	'''
 	def satisfaction(self, row, col):
 
@@ -53,6 +53,9 @@ class Grid(object):
 		if agent == ' ':
 			return 1
 
+		if sub.x + sub.o - 1 == 0:
+			return 0
+	
 		return round((getattr(sub, agent.lower())-1)/ (sub.x + sub.o - 1),4)
 
 	'''
@@ -124,38 +127,50 @@ def dissimilarity(grid, row1, col1, row2, col2):
 '''
 Simplified
 '''
-def schelling(grid, t):
+def schelling(grid, t, **args):
 	if t < 0 or t > 1:
 		return None 
 
 	changed_flag = True
+	round = 0
 
 	while changed_flag:
 		dissatisfied = []
 		changed_flag = False
+		round += 1
+
 		for i in range(grid.length):
 			for j in range(grid.width):
 				if grid.satisfaction(i,j) < t:
 					dissatisfied.append((i,j))
+		if args['log']:
+			dissatisfaction = len(dissatisfied)/(grid.get_x() + grid.get_o())
+			print "Satisfaction: ", (1-dissatisfaction) 
+			print "Round: ", round
 
 		for row,col in dissatisfied:
 			grid.vacate(row,col)
 			changed_flag = True
-			
+		
+		if args['limit'] and round == args['limit']:
+			break	
+
 	return grid
 
 '''
 Segregates
 '''
-def schelling_segregate(grid,t):
+def schelling_segregate(grid,t, **args):
 	if t < 0 or t > 1:
 		return None 
 
 	changed_flag = True
-
+	round = 0
 	while changed_flag:
 		dissatisfied = []
 		changed_flag = False
+		round += 1
+
 		dissatisfied_agents = []
 		for i in range(grid.length):
 			for j in range(grid.width):
@@ -169,8 +184,17 @@ def schelling_segregate(grid,t):
 			vacant.append((row,col))
 			changed_flag = True
 			
+		if args['log']:
+			dissatisfaction = len(dissatisfied)/(grid.get_x() + grid.get_o())
+			print "Satisfaction: ", (1-dissatisfaction) 
+			print "Round: ", round
+
 		for agent in dissatisfied_agents:
 			row,col = vacant.pop(random.randint(0,len(vacant)-1))
 			grid.place(row,col, agent)
+
+		if args['limit'] and round == args['limit']:
+			break	
+
 
 	return grid	
