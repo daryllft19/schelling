@@ -23,24 +23,25 @@ class Test(unittest.TestCase):
 		col2 = random.randint(col1,g.width-1)
 
 		self.assertIsInstance(dissimilarity(g, row1,col1,row2,col2), float) 
+		self.assertEqual(dissimilarity(g,0,6, 3,9), 0.0209) 
 
 	'''
-	Schelling should return a grid	
+	Schelling should return a grid after 100 rounds	
 	'''	
 	def test_schelling(self):
 		g = loadgrid('test.txt')
 		t = round(random.random(),2)
 		print 'Testing schelling using threshold = ', t
-		self.assertIsInstance(schelling(g,t), Grid)
+		self.assertIsInstance(schelling(g,t, log=True, limit=100), Grid)
 
 	'''
-	Schelling segregate should return a grid	
+	Schelling segregate should return a grid after 100 rounds	
 	'''	
 	def test_schelling_segregate(self):
 		g = loadgrid('test.txt')
 		t = round(random.random(),2)
+		self.assertIsInstance(schelling_segregate(g,t, log=True, limit=100), Grid)
 		print 'Testing schelling segregate using threshold = ', t
-		self.assertIsInstance(schelling_segregate(g,t), Grid)
 
 if __name__ == '__main__':
 	unittest.main()
