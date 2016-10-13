@@ -35,7 +35,7 @@ schelling_segregate(grid, threshold)
 ```
 `schelling()` and `schelling_segregate()` can have additional parameters:
 1. log - enable/disable logs
-..*True
-..*False
+..* True
+..* False
 2. limit - maximum number of rounds
-...Any number 
+... Any number 
