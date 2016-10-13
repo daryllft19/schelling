@@ -7,7 +7,10 @@ import random
 Grid object
 '''
 class Grid(object):
-	
+
+	'''
+	Initialization
+	'''	
 	def __init__(self, array):
 		self.array = array
 		self.x = (array == 'X').sum() 
@@ -15,6 +18,16 @@ class Grid(object):
 		self.vacant = (array == ' ').sum() 
 		self.length, self.width = array.shape
 	
+	'''
+	Representation	
+	'''	
+	def __repr__(self):
+		display = ''
+		for i in range(self.length):		
+			for j in range(self.width):		
+				display += self.array[i][j] 
+			display += '\n' 
+		return display
 
 	'''
 	Adjacent cells
