@@ -37,5 +37,4 @@ schelling_segregate(grid, threshold)
 1. log - enable/disable logs
   * True
   * False
-2. limit - maximum number of rounds
-    Any number 
+2. limit - maximum number of rounds. Any positive integer can be a limit.
