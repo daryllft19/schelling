@@ -33,7 +33,7 @@ schelling_segregate(g, 0.3)
 schelling(grid, threshold)
 schelling_segregate(grid, threshold)
 ```
-schelling and schelling_segregate can have additional parameters:
+`schelling()` and `schelling_segregate()` can have additional parameters:
 1.log - enable/disable logs
 ..*True
 ..*False
