@@ -146,6 +146,8 @@ def schelling(grid, t, **args):
 
 	changed_flag = True
 	round = 0
+	if 'limit' not in args or args['limit'] <= 0:
+		args['limit'] = 1000
 
 	while changed_flag:
 		dissatisfied = []
@@ -165,7 +167,7 @@ def schelling(grid, t, **args):
 			grid.vacate(row,col)
 			changed_flag = True
 		
-		if 'limit' in args and round == args['limit'] and args['limit'] > 0:
+		if round == args['limit']:
 			break	
 
 	return grid
@@ -179,6 +181,9 @@ def schelling_segregate(grid,t, **args):
 
 	changed_flag = True
 	round = 0
+	if 'limit' not in args or args['limit'] <= 0:
+		args['limit'] = 1000
+
 	while changed_flag:
 		dissatisfied = []
 		changed_flag = False
@@ -206,7 +211,7 @@ def schelling_segregate(grid,t, **args):
 			row,col = vacant.pop(random.randint(0,len(vacant)-1))
 			grid.place(row,col, agent)
 
-		if 'limit' in args and round == args['limit'] and args['limit'] > 0:
+		if round == args['limit']:
 			break	
 
 
