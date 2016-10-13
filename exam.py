@@ -173,6 +173,4 @@ def schelling_segregate(grid,t):
 			row,col = vacant.pop(random.randint(0,len(vacant)-1))
 			grid.place(row,col, agent)
 
-		print grid.array
-
 	return grid	
