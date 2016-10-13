@@ -27,3 +27,15 @@ schelling(g, 0.3)
 g = loadgrid(<filename>) 
 schelling_segregate(g, 0.3)
 ```
+
+### To use schelling or schelling_segregate:
+```
+schelling(grid, threshold)
+schelling_segregate(grid, threshold)
+```
+schelling and schelling_segregate can have additional parameters:
+1.log - enable/disable logs
+..*True
+..*False
+2. limit - maximum number of rounds
+...Any number 
